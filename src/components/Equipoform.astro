@@ -1,0 +1,114 @@
+---
+  // No necesitas importar dependencias adicionales para este formulario en Astro.
+---
+
+<form id="equipoForm" method="POST" action="/api/registrar-equipo" class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-xl space-y-6">
+  <h2 class="text-3xl font-semibold text-center text-blue-600">Inscripción de Equipo</h2>
+  
+  <!-- Nombre del equipo -->
+  <div>
+    <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre del equipo</label>
+    <input
+      type="text"
+      name="nombre"
+      id="nombre"
+      placeholder="Nombre del equipo"
+      required
+      class="mt-2 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <!-- Jugadores -->
+  <div>
+    <h3 class="font-semibold text-xl text-gray-800">Jugadores (7 jugadores)</h3>
+    <div class="space-y-4 mt-4">
+      {Array.from({ length: 7 }, (_, i) => (
+        <div key={i}>
+          <label for={`jugador${i + 1}`} class="block text-gray-700">Jugador {i + 1}</label>
+          <input
+            type="text"
+            name={`jugador${i + 1}`}
+            id={`jugador${i + 1}`}
+            placeholder={`Jugador ${i + 1}`}
+            required
+            class="mt-2 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Suplentes -->
+  <div>
+    <h3 class="font-semibold text-xl text-gray-800">Suplentes (opcional, hasta 3)</h3>
+    <div class="space-y-4 mt-4">
+      {Array.from({ length: 3 }, (_, i) => (
+        <div key={i}>
+          <label for={`suplente${i + 1}`} class="block text-gray-700">Suplente {i + 1}</label>
+          <input
+            type="text"
+            name={`suplente${i + 1}`}
+            id={`suplente${i + 1}`}
+            placeholder={`Suplente ${i + 1}`}
+            class="mt-2 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Contacto -->
+  <div>
+    <label for="contacto" class="block text-lg font-medium text-gray-700">Contacto (Teléfono o Email)</label>
+    <input
+      type="text"
+      name="contacto"
+      id="contacto"
+      placeholder="Teléfono o Email"
+      required
+      class="mt-2 p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <!-- Botón de envío -->
+  <div class="mt-6 text-center">
+    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      Continuar al pago
+    </button>
+  </div>
+</form>
+
+<script type="module">
+  document.getElementById("equipoForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const equipo = {
+      nombre: formData.get("nombre"),
+      jugadores: [],
+      suplentes: [],
+      contacto: formData.get("contacto"),
+    };
+
+    // Obtener los jugadores
+    for (let i = 1; i <= 7; i++) {
+      equipo.jugadores.push(formData.get(`jugador${i}`));
+    }
+
+    // Obtener los suplentes
+    for (let i = 1; i <= 3; i++) {
+      const suplente = formData.get(`suplente${i}`);
+      if (suplente) equipo.suplentes.push(suplente);
+    }
+
+    // Ver en consola los datos del equipo
+    console.log("Equipo inscrito:", equipo);
+
+    // Mostrar mensaje de éxito
+    alert("Formulario enviado correctamente. Redirigiendo al pago...");
+
+    // Redirigir a la página de pago
+    window.location.href = "/pago";
+  });
+</script>
+

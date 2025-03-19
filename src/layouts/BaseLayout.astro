@@ -1,0 +1,68 @@
+---
+
+
+// Definimos el menú como un array de objetos
+const menu = [
+  { name: "Inicio", link: "/" },
+  { name: "Equipos", link: "/equipos" },
+  { name: "Reglas", link: "/reglas" },
+  { name: "Contacto", link: "/contacto" },
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato de Fútbol</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-blue-600 text-white p-4">
+      <nav class="flex justify-between items-center">
+        <div class="text-xl font-bold">Campeonato</div>
+
+        <!-- Botón de menú móvil -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl">
+          ☰
+        </button>
+
+        <!-- Menú -->
+        <ul id="menu" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+          {menu.map((item) => (
+            <li class="relative">
+              <a href={item.link} class="hover:underline">{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido dinámico de la página -->
+    <main class="flex-grow flex flex-col items-center justify-center text-center px-4">
+      <slot /> 
+    </main>
+
+    <!-- Script para el menú móvil -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+
+        if (menuBtn && menu) {
+          menuBtn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+          });
+        }
+      });
+    </script>
+<a href="/inscripcion" class="fixed bottom-6 right-6 bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition transform">
+  ¡Inscríbete ahora!
+</a>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center">
+  <i class="fab fa-whatsapp"></i>
+</a>
+  </body>
+</html>

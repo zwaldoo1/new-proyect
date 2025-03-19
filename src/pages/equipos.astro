@@ -1,0 +1,34 @@
+---
+title: "Equipos Inscritos"
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout/>
+<main class="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-xl space-y-6">
+    <h2 class="text-3xl font-semibold text-center text-blue-600">Equipos Inscritos</h2>
+    <p class="mt-2 text-center text-gray-600">Aquí puedes ver los equipos que se han inscrito hasta el momento.</p>
+
+    <!-- Lista de Equipos -->
+    <div class="mt-8 space-y-4">
+      <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Guerreros</h3>
+        <span class="text-gray-500">Contacto: 123-456-7890</span>
+      </div>
+
+      <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Tigres</h3>
+        <span class="text-gray-500">Contacto: tigres@email.com</span>
+      </div>
+
+      <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Águilas</h3>
+        <span class="text-gray-500">Contacto: 987-654-3210</span>
+      </div>
+
+      <!-- Añadir más equipos -->
+    </div>
+  </div>
+</main>
+<Footer/>

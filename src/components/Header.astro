@@ -1,0 +1,85 @@
+---
+const menu = [
+  { name: "Inicio", link: "/" },
+  { name: "Inscripción", link: "/inscripcion" },
+  { 
+    name: "Pago", 
+    link: "/pago",
+    dropdown: [
+      { name: "Tarjeta", link: "/pago/tarjeta" },
+      { name: "Transferencia", link: "/pago/transferencia" },
+    ]
+  }
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato de Fútbol</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-blue-600 text-white p-4">
+      <nav class="flex justify-between items-center">
+        <div class="text-xl font-bold">Campeonato</div>
+
+        <!-- Botón de menú móvil -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl">
+          ☰
+        </button>
+
+        <!-- Menú -->
+        <ul id="menu" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+          {menu.map((item) => (
+            <li class="relative">
+              {item.dropdown ? (
+                <div class="group relative">
+                  <button class="dropdown-btn flex items-center hover:underline">
+                    {item.name} ▼
+                  </button>
+                  <ul class="dropdown-menu hidden absolute left-0 top-full bg-white text-black rounded shadow-md mt-1 w-40 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:block">
+                    {item.dropdown.map((sub) => (
+                      <li>
+                        <a href={sub.link} class="block px-4 py-2 hover:bg-gray-200">{sub.name}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <a href={item.link} class="hover:underline">{item.name}</a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main class="flex flex-col items-center justify-center min-h-screen text-center px-4">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">Bienvenido al Campeonato de Fútbol</h1>
+      <p class="text-lg text-gray-600">Inscripción abierta, elige tu método de pago.</p>
+      <div class="flex flex-col items-center space-y-4 mt-2">
+        <span class="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-md">
+          Inscripción Abierta
+        </span>
+        <a href="/reglas" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition">
+          Reglas del Torneo
+        </a>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuBtn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+
+        if (menuBtn && menu) {
+          menuBtn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

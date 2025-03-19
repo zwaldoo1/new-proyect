@@ -1,0 +1,65 @@
+---
+const images = [
+  "/images/imagen1.jpg.jpg",
+  "/images/imagen2.jpg.jpg",
+  "/images/imagen3.jpg.jpg",
+  "/images/imagen4.jpg.jpg",
+  "/images/imagen.jpg.jpg",
+];
+---
+
+<style>
+  .carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    background: #f8f8f8;
+    padding: 20px 0;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll-left 20s linear infinite;
+    width: max-content;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 150px;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  @keyframes scroll-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+
+<div class="carousel-container">
+  <div class="carousel-track">
+    {images.map((src, index) => (
+      <div class="carousel-item" key={index}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+    {images.map((src, index) => (
+      <div class="carousel-item" key={`duplicate-${index}`}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+  </div>
+</div>
