@@ -5,7 +5,8 @@ import Carrusel from "../components/carrusel.astro";
 ---
 
 <BaseLayout>
-  
+  <body class="bg-animated">
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const sections = document.querySelectorAll("[data-scroll]");
@@ -29,7 +30,7 @@ import Carrusel from "../components/carrusel.astro";
   <!-- Agrega el Navbar aquí -->
   <main class="flex flex-col items-center justify-center text-center px-4">
     <!-- Primer título -->
-    <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+    <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-red-250 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
       <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Bienvenido al Campeonato de Fútbol</h1>
     <p class="text-lg text-gray-600 mt-2">Inscripción abierta, elige tu método de pago.</p>
 
@@ -49,7 +50,7 @@ import Carrusel from "../components/carrusel.astro";
   <Carrusel/>
   <!-- Sección de Ubicación -->
   <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Ubicación del Campeonato</h2>
+    <h2 class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-white-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>Ubicación del Campeonato</h2>
     <div id="map" class="w-full max-w-4xl h-96 rounded-lg shadow-md"></div>
   </section>
 
@@ -75,7 +76,7 @@ import Carrusel from "../components/carrusel.astro";
     <iframe width="560" height="315" src="https://www.youtube.com/embed/yDg4D4DLH78?si=Nv-TfVQ2KAwmPdXj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
     <!-- Cuadro de texto -->
-    <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+    <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-white-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
       <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">¡Hablemos!</h3>
       <p class="mb-4">Conéctate con nosotros a través de nuestras redes sociales o envíanos un mensaje. Estamos aquí para ayudarte.</p>
       <div class="center space-x-6 text-3xl">
@@ -96,29 +97,60 @@ import Carrusel from "../components/carrusel.astro";
   </div>
 </section>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhz0xrgbQPjKWXGaYZjIi8ewFlqXGYVCQ&callback=initMap" async defer></script>
-  <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Revisa nuestras redes sociales</h2>
-    <p class="text-gray-600 mb-6">Síguenos en nuestras redes o envíanos un mensaje.</p>
-  
-    <div class="flex justify-center space-x-6">
-      <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="text-green-500 text-3xl hover:scale-110 transition">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://facebook.com/tu-pagina" target="_blank" class="text-blue-600 text-3xl hover:scale-110 transition">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a href="https://instagram.com/tu-pagina" target="_blank" class="text-pink-500 text-3xl hover:scale-110 transition">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://twitter.com/tu-pagina" target="_blank" class="text-blue-400 text-3xl hover:scale-110 transition">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </div>
-  </section>
+<section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <h2 class="text-3xl font-bold text-center mb-4">¡Conéctate con Nosotros!</h2>
+  <p class="text-center text-lg mb-6">Síguenos en nuestras redes y entérate de todas las novedades.</p>
+
+  <div class="flex justify-center space-x-6">
+    <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="group relative">
+      <div class="w-20 h-20 bg-green-500 flex items-center justify-center rounded-full shadow-lg transform transition hover:scale-110 hover:shadow-xl">
+        <i class="fab fa-whatsapp text-3xl text-white"></i>
+      </div>
+    </a>
+
+    <a href="https://facebook.com/tu-pagina" target="_blank" class="group relative">
+      <div class="w-20 h-20 bg-blue-600 flex items-center justify-center rounded-full shadow-lg transform transition hover:scale-110 hover:shadow-xl">
+        <i class="fab fa-facebook text-3xl text-white"></i>
+      </div>
+    </a>
+
+    <a href="https://instagram.com/tu-pagina" target="_blank" class="group relative">
+      <div class="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center rounded-full shadow-lg transform transition hover:scale-110 hover:shadow-xl">
+        <i class="fab fa-instagram text-3xl text-white"></i>
+      </div>
+    </a>
+
+    <a href="https://twitter.com/tu-pagina" target="_blank" class="group relative">
+      <div class="w-20 h-20 bg-blue-400 flex items-center justify-center rounded-full shadow-lg transform transition hover:scale-110 hover:shadow-xl">
+        <i class="fab fa-twitter text-3xl text-white"></i>
+      </div>
+    </a>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollElements = document.querySelectorAll("[data-scroll]");
+
+  const scrollHandler = () => {
+    scrollElements.forEach((el) => {
+      const position = el.getBoundingClientRect().top;
+      if (position < window.innerHeight * 0.9) {
+        el.classList.add("opacity-100", "translate-y-0");
+        el.classList.remove("opacity-0", "translate-y-10");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", scrollHandler);
+  scrollHandler(); // Para ejecutar la función en caso de que ya esté visible al cargar
+});
+</script>
+
+
   
   <!-- Sección de Preguntas Frecuentes -->
-  <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Preguntas Frecuentes</h2>
   </section>
   
@@ -144,13 +176,13 @@ import Carrusel from "../components/carrusel.astro";
 
 
   </a>
-  <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6"></h2>Formulario de Inscripción</h2>
   <p class="text-gray-600 mb-6">Completa el formulario para inscribirte.</p>
 
   <!-- Aquí va tu formulario -->
   
-  <form action="#inscripcion" method="GET">
+  <form action="/inscripcion" method="GET">
     <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition transform">
       Inscribirse
     </button>
@@ -160,7 +192,7 @@ import Carrusel from "../components/carrusel.astro";
 
   
   <!-- Asesoramiento en Vivo -->
-  <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">¿Tienes dudas sobre el pago?</h2>
   <p class="text-gray-600 mb-4">Escríbenos y te ayudaremos en minutos.</p>
   <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
