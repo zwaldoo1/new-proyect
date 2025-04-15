@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
+  output: "server", // Si tienes backend, usa "server", si es solo frontend usa "static"
+  
   build: {
-    // Asegúrate de que el objetivo de salida sea compatible con ESModules
-    target: 'es2020',
+    target: 'es2020', // Asegura compatibilidad con ESModules
   },
+  
   alias: {
-    '@styles': './src/styles', // Alias para las rutas
-  },
+    '@styles': './src/styles', // Alias para rutas
+  }
 });
 

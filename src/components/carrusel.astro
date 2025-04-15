@@ -8,6 +8,25 @@ const images = [
 ];
 ---
 
+<div class="carousel-container">
+  <div class="carousel-track">
+    {images.map((src, index) => (
+      <div class="carousel-item" key={index} data-img={src}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+    {images.map((src, index) => (
+      <div class="carousel-item" key={`dup-${index}`} data-img={src}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<div id="modal" class="modal hidden">
+  <img id="modal-image" src="" alt="Imagen ampliada" />
+</div>
+
 <style>
   .carousel-container {
     overflow: hidden;
@@ -29,6 +48,7 @@ const images = [
     flex: 0 0 auto;
     width: 200px;
     height: 150px;
+    cursor: pointer;
   }
 
   .carousel-item img {
@@ -47,19 +67,50 @@ const images = [
       transform: translateX(-100%);
     }
   }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal.hidden {
+    display: none;
+  }
+
+  .modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
 </style>
 
-<div class="carousel-container">
-  <div class="carousel-track">
-    {images.map((src, index) => (
-      <div class="carousel-item" key={index}>
-        <img src={src} alt={`Imagen ${index + 1}`} />
-      </div>
-    ))}
-    {images.map((src, index) => (
-      <div class="carousel-item" key={`duplicate-${index}`}>
-        <img src={src} alt={`Imagen ${index + 1}`} />
-      </div>
-    ))}
-  </div>
-</div>
+<script is:global>
+  window.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.carousel-item');
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+
+    items.forEach((item) => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-img');
+        modalImage.src = src;
+        modal.classList.remove('hidden');
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+  });
+</script>

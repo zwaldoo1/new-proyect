@@ -9,6 +9,7 @@ const menu = [
   { name: "Contacto", link: "/contacto" },
 ];
 ---
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
 
 <html lang="es">
   <head>
@@ -17,7 +18,8 @@ const menu = [
     <title>Campeonato de Fútbol</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body class="bg-gray-100 flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen bg-transparent text-white">
+    <div id="tsparticles" class="absolute inset-0 -z-10"></div>
 
     <header class="bg-blue-600 text-white p-4">
       <nav class="flex justify-between items-center">
@@ -65,4 +67,53 @@ const menu = [
   <i class="fab fa-whatsapp"></i>
 </a>
   </body>
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: "transparent"
+      },
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            area: 800
+          }
+        },
+        color: {
+          value: "#ffffff"
+        },
+        shape: {
+          type: "circle"
+        },
+        opacity: {
+          value: 0.5
+        },
+        size: {
+          value: 3
+        },
+        move: {
+          enable: true,
+          speed: 1
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: {
+            enable: true,
+            mode: "repulse"
+          }
+        },
+        modes: {
+          repulse: {
+            distance: 100
+          }
+        }
+      }
+    });
+  </script>
+  
 </html>
