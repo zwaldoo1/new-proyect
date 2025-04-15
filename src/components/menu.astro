@@ -1,0 +1,102 @@
+---
+const menu = [
+  { name: "Inicio", link: "/" },
+  { name: "Inscripción", link: "/inscripcion" },
+  {
+    name: "Pago",
+    link: "/pago",
+    dropdown: [
+      { name: "Tarjeta", link: "/pago/tarjeta" },
+      { name: "Transferencia", link: "/pago/transferencia" },
+    ]
+  }
+];
+---
+
+<header class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white fixed w-full top-0 left-0 z-50 shadow-lg backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold tracking-wide">⚽ Campeonato</div>
+
+    <button id="menu-toggle" class="md:hidden text-3xl focus:outline-none transition hover:scale-110">
+      ☰
+    </button>
+
+    <ul class="hidden md:flex space-x-8 text-lg items-center font-medium">
+      {menu.map((item) => (
+        <li class="relative group">
+          {item.dropdown && (
+            <div>
+              <button class="flex items-center hover:text-yellow-300 transition">
+                {item.name} <span class="ml-1">▼</span>
+              </button>
+              <ul class="absolute hidden group-hover:block bg-white text-black rounded shadow-lg mt-2 w-44 animate-fade-in">
+                {item.dropdown.map((sub) => (
+                  <li>
+                    <a href={sub.link} class="block px-4 py-2 hover:bg-indigo-100 transition">
+                      {sub.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {!item.dropdown && (
+            <a href={item.link} class="hover:text-yellow-300 transition">{item.name}</a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Menú móvil -->
+  <ul id="mobile-menu" class="md:hidden hidden flex flex-col bg-indigo-700 px-4 py-2 space-y-2 text-lg transition-all duration-300">
+    {menu.map((item) => (
+      <li>
+        {item.dropdown && (
+          <details>
+            <summary class="cursor-pointer py-2 hover:underline">{item.name}</summary>
+            <ul class="pl-4">
+              {item.dropdown.map((sub) => (
+                <li>
+                  <a href={sub.link} class="block py-1 hover:underline">{sub.name}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        {!item.dropdown && (
+          <a href={item.link} class="block py-2 hover:underline">{item.name}</a>
+        )}
+      </li>
+    ))}
+  </ul>
+</header>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+  }
+</style>
+
+<script is:global>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    toggle?.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  });
+</script>

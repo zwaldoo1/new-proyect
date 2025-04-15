@@ -1,16 +1,16 @@
 ---
-
-
-// Definimos el menú como un array de objetos
+import Menu from "../components/Menu.astro";
 const menu = [
   { name: "Inicio", link: "/" },
   { name: "Equipos", link: "/equipos" },
   { name: "Reglas", link: "/reglas" },
   { name: "Contacto", link: "/contacto" },
 ];
----
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+// Definimos el menú como un array de objetos
 
+---
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
@@ -63,7 +63,7 @@ const menu = [
   ¡Inscríbete ahora!
 </a>
 <!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center">
+<a href="https://wa.me/+56951616431" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center">
   <i class="fab fa-whatsapp"></i>
 </a>
   </body>
