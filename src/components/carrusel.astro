@@ -8,25 +8,42 @@ const images = [
 ];
 ---
 
+<!-- Carrusel 1: izquierda -->
 <div class="carousel-container">
-  <div class="carousel-track">
+  <div class="carousel-track scroll-left">
     {images.map((src, index) => (
-      <div class="carousel-item" key={index} data-img={src}>
+      <div class="carousel-item" data-img={src}>
         <img src={src} alt={`Imagen ${index + 1}`} />
       </div>
     ))}
     {images.map((src, index) => (
-      <div class="carousel-item" key={`dup-${index}`} data-img={src}>
+      <div class="carousel-item" data-img={src}>
         <img src={src} alt={`Imagen ${index + 1}`} />
       </div>
     ))}
   </div>
 </div>
 
+<!-- Carrusel 2: derecha -->
+<div class="carousel-container">
+  <div class="carousel-track scroll-right">
+    {images.map((src, index) => (
+      <div class="carousel-item" data-img={src}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+    {images.map((src, index) => (
+      <div class="carousel-item" data-img={src}>
+        <img src={src} alt={`Imagen ${index + 1}`} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- Modal -->
 <div id="modal" class="modal hidden">
   <img id="modal-image" src="" alt="Imagen ampliada" />
 </div>
-
 <style>
   .carousel-container {
     overflow: hidden;
@@ -40,8 +57,15 @@ const images = [
   .carousel-track {
     display: flex;
     gap: 20px;
-    animation: scroll-left 20s linear infinite;
     width: max-content;
+  }
+
+  .scroll-left {
+    animation: scroll-left 20s linear infinite;
+  }
+
+  .scroll-right {
+    animation: scroll-right 20s linear infinite;
   }
 
   .carousel-item {
@@ -65,6 +89,15 @@ const images = [
     }
     to {
       transform: translateX(-100%);
+    }
+  }
+
+  @keyframes scroll-right {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 
@@ -94,7 +127,6 @@ const images = [
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   }
 </style>
-
 <script is:global>
   window.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.carousel-item');

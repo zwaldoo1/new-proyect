@@ -1,8 +1,39 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PagoButton from "../components/PagoButton.astro";
+import Footer from "../components/Footer.astro"
 ---
+
 <BaseLayout>
   <h2>Pagar Inscripción</h2>
+
+  <p>Completa tu inscripción eligiendo uno de los métodos de pago disponibles. Una vez confirmado el pago, recibirás un correo electrónico con la confirmación.</p>
+
+  <section>
+    <h3>Métodos de Pago Disponibles</h3>
+    <ul>
+      <li><strong>Tarjeta de crédito o débito:</strong> Visa, MasterCard, American Express.</li>
+      <li><strong>Transferencia bancaria:</strong> Te enviaremos los datos al seleccionar esta opción.</li>
+      <li><strong>Pago en efectivo:</strong> Disponible en puntos autorizados (OXXO, 7-Eleven, etc.).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Pasos para Realizar el Pago</h3>
+    <ol>
+      <li>Selecciona el método de pago que prefieras.</li>
+      <li>Haz clic en el botón de pago y sigue las instrucciones.</li>
+      <li>Guarda tu comprobante de pago.</li>
+      <li>Recibirás un correo con la confirmación de tu inscripción.</li>
+    </ol>
+  </section>
+
   <PagoButton />
+
+  <section style="margin-top: 2rem;">
+    <h4>¿Tienes dudas o necesitas ayuda?</h4>
+    <p>Escríbenos a <a href="mailto:pagos@ejemplo.com">pagos@ejemplo.com</a> o llama al <strong>+52 55 1234 5678</strong>.</p>
+  </section>
+  
 </BaseLayout>
+<Footer/>
