@@ -1,7 +1,4 @@
 ---
-import Particles from "astro-particles";
-import type { ISourceOptions } from "tsparticles-engine";
-
 const options: ISourceOptions = {
   background: { color: "#8d0000" }, // <-- este no se verá, sirve para fallback
   fullScreen: { enable: true, zIndex: -1 },
@@ -21,7 +18,7 @@ const menu = [
   { name: "Contacto", link: "/contacto" },
 ];
 ---
----
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -43,11 +40,11 @@ const menu = [
 .loader-bottom {
   width: 100%;
   height: 50%;
-  background-color: #ffffff;
+  background-color: #0e51ee;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.8s ease-in-out;
+  transition: transform 0.6s ease-in-out; /* antes tenías 0.8s, lo bajamos un poco */
 }
 
 .loader-top {
@@ -72,7 +69,8 @@ const menu = [
   align-items: center;
   gap: 20px;
   opacity: 0;
-  animation: fadeIn 0.4s ease-in-out 0.2s forwards;
+  animation: fadeIn 0.4s ease-in-out 0.1s forwards;
+  animation-fill-mode: forwards; /* ✅ evita que vuelva a opacidad 0 */
 }
 
 @keyframes fadeIn {
@@ -89,12 +87,15 @@ const menu = [
 .spinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #ccc;
+  border: 5px solid #fca232;
   border-top: 5px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
+{
+  transition: transform 0.5s ease-in-out; /* en vez de 0.8s */
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -116,46 +117,32 @@ const menu = [
 </div>
 
 
-    <!-- Script para ocultar el loader -->
-    <script>
-      window.addEventListener('load', () => {
-        const loader = document.getElementById('loader-container');
-        loader.classList.add('hidden');
-      });
-    </script>
-  </body>
-</html>
+<script>
+  function hideLoader() {
+    const loader = document.getElementById('loader-container');
+    if (loader) {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 800); // lo remueve después de la animación
+    }
+  }
+
+  // Ejecuta al cargar completamente la página
+  window.addEventListener('load', hideLoader);
+
+  // Fallback por si falla el evento load (por ejemplo en navegaciones rápidas)
+  setTimeout(hideLoader, 5000);
+</script>
 
 
     <!-- Tu contenido normal comienza aquí -->
 
 <html lang="es">
-  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><slot name="title" /></title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script type="module" src="/scripts/particles-init.js"></script>
-
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        background-color: transparent; /* ✅ aquí */
-        overflow-x: hidden;
-      }
-    </style>
-  </head>
-
-  <body class="flex flex-col min-h-screen text-white relative">
-
-    <!-- ✅ Partículas -->
-    <Particles id="tsparticles" options={options} init="particlesInit" loaded="particlesLoaded" />
-
     <!-- ✅ Contenido -->
     <header class="bg-blue-600 text-white p-4 relative z-10">
       <nav class="flex justify-between items-center">
@@ -183,35 +170,27 @@ const menu = [
       <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const menuBtn = document.getElementById("menu-btn");
-        const menu = document.getElementById("menu");
-
-        if (menuBtn && menu) {
-          menuBtn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-          });
-        }
-      });
-    </script>
 <script>
-  window.addEventListener('load', () => {
+  function hideLoader() {
     const loader = document.getElementById('loader-container');
-
-    // Desencadena el desplazamiento
-    loader.classList.add('hidden');
-
-    // Después de la transición, oculta completamente
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, 1000); // Asegúrate de que coincida con la duración del desplazamiento (0.8s ~ 1s)
-  });
+    if (loader) {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 800); // coincide con tu transition
+    }
+  }
+  // Fallback por si algo falla
+  setTimeout(hideLoader, 5000);
 </script>
 
+    <footer class="bg-gray-800 text-white p-4 mt-8 relative z-10">
+      <div class="text-center">
+        <p>&copy; 2025 Campeonato. Todos los derechos reservados.</p>
+        <p>Desarrollado por Francisco Ojeda</p>
+      </div>
+    </footer>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.37.0/tsparticles.min.js"></script>
+    <script></script>
   </body>
-  </html>
-  
 </html>
+  </html>
