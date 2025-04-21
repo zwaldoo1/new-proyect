@@ -1,36 +1,166 @@
 ---
-import Menu from "../components/Menu.astro";
+import Particles from "astro-particles";
+import type { ISourceOptions } from "tsparticles-engine";
+
+const options: ISourceOptions = {
+  background: { color: "#8d0000" }, // <-- este no se verá, sirve para fallback
+  fullScreen: { enable: true, zIndex: -1 },
+  particles: {
+    number: { value: 100 },
+    move: { enable: true, speed: 2 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    size: { value: 3 }
+  }
+};
+
 const menu = [
   { name: "Inicio", link: "/" },
   { name: "Equipos", link: "/equipos" },
   { name: "Reglas", link: "/reglas" },
   { name: "Contacto", link: "/contacto" },
 ];
-// Definimos el menú como un array de objetos
-
 ---
-
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+---
 <html lang="es">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campeonato de Fútbol</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  </head>
-  <body class="flex flex-col min-h-screen bg-transparent text-white">
-    <div id="tsparticles" class="absolute inset-0 -z-10"></div>
+    <meta charset="UTF-8" />
+    <title>Campeonato</title>
+    <style>
+#loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
-    <header class="bg-blue-600 text-white p-4">
+.loader-top,
+.loader-bottom {
+  width: 100%;
+  height: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s ease-in-out;
+}
+
+.loader-top {
+  transform: translateY(0%);
+}
+
+.loader-bottom {
+  transform: translateY(0%);
+}
+
+#loader-container.hidden .loader-top {
+  transform: translateY(-100%);
+}
+
+#loader-container.hidden .loader-bottom {
+  transform: translateY(100%);
+}
+
+.logo-and-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeIn 0.4s ease-in-out 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.loader-logo {
+  width: 360px;
+  height: auto;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+    </style>
+  </head>
+  <body>
+
+<!-- Loader con desplazamiento dual y spinner -->
+<div id="loader-container">
+  <div class="loader-top">
+    <div class="logo-and-spinner">
+      <img src="/images/logo3.svg" alt="Logo" width="100" height="100" />
+      <div class="spinner"></div>
+    </div>
+  </div>
+  <div class="loader-bottom"></div>
+</div>
+
+
+    <!-- Script para ocultar el loader -->
+    <script>
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('loader-container');
+        loader.classList.add('hidden');
+      });
+    </script>
+  </body>
+</html>
+
+
+    <!-- Tu contenido normal comienza aquí -->
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><slot name="title" /></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script type="module" src="/scripts/particles-init.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: transparent; /* ✅ aquí */
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+
+  <body class="flex flex-col min-h-screen text-white relative">
+
+    <!-- ✅ Partículas -->
+    <Particles id="tsparticles" options={options} init="particlesInit" loaded="particlesLoaded" />
+
+    <!-- ✅ Contenido -->
+    <header class="bg-blue-600 text-white p-4 relative z-10">
       <nav class="flex justify-between items-center">
         <div class="text-xl font-bold">Campeonato</div>
-
-        <!-- Botón de menú móvil -->
-        <button id="menu-btn" class="md:hidden text-white text-2xl">
-          ☰
-        </button>
-
-        <!-- Menú -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl">☰</button>
         <ul id="menu" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
           {menu.map((item) => (
             <li class="relative">
@@ -41,12 +171,18 @@ const menu = [
       </nav>
     </header>
 
-    <!-- Contenido dinámico de la página -->
-    <main class="flex-grow flex flex-col items-center justify-center text-center px-4">
-      <slot /> 
+    <main class="flex-grow flex flex-col items-center justify-center text-center px-4 relative z-10">
+      <slot />
     </main>
 
-    <!-- Script para el menú móvil -->
+    <a href="/inscripcion" class="fixed bottom-6 right-6 bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition transform z-20">
+      ¡Inscríbete ahora!
+    </a>
+
+    <a href="https://wa.me/+56951616431" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center z-20">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const menuBtn = document.getElementById("menu-btn");
@@ -59,61 +195,23 @@ const menu = [
         }
       });
     </script>
-<a href="/inscripcion" class="fixed bottom-6 right-6 bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition transform">
-  ¡Inscríbete ahora!
-</a>
-<!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/+56951616431" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-container');
+
+    // Desencadena el desplazamiento
+    loader.classList.add('hidden');
+
+    // Después de la transición, oculta completamente
+    setTimeout(() => {
+      loader.style.display = 'none';
+    }, 1000); // Asegúrate de que coincida con la duración del desplazamiento (0.8s ~ 1s)
+  });
+</script>
+
+
+
   </body>
-  <script>
-    tsParticles.load("tsparticles", {
-      fullScreen: {
-        enable: false
-      },
-      background: {
-        color: "transparent"
-      },
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            area: 800
-          }
-        },
-        color: {
-          value: "#ffffff"
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.5
-        },
-        size: {
-          value: 3
-        },
-        move: {
-          enable: true,
-          speed: 1
-        }
-      },
-      interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: "repulse"
-          }
-        },
-        modes: {
-          repulse: {
-            distance: 100
-          }
-        }
-      }
-    });
-  </script>
+  </html>
   
 </html>

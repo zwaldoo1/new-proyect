@@ -3,22 +3,16 @@
 @tailwind utilities;
 
 /* Solo fondo animado al body */
-body {
-  background: linear-gradient(-45deg, #ff00cc, #333399, #00f0ff, #120078);
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
-
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: transparent; /* <-- ✅ este cambio es importante */
 }
 
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 
 /* Botón del menú móvil */
 #menu-btn {
@@ -67,7 +61,7 @@ body {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px transparent;
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
@@ -79,8 +73,8 @@ body {
 }
 
 .contacto-form button {
-    background-color: #007BFF;
-    color: white;
+    background-color:transparent;
+    color: transparent;
     padding: 12px;
     font-size: 1rem;
     width: 100%;
@@ -95,7 +89,7 @@ body {
 }
 
 .contacto-form button:active {
-    background-color: #004085;
+    background-color: transparent;
 }
 
 /* Estilos generales para la página de reglas */
@@ -126,7 +120,7 @@ body {
 }
 
 .reglas-list li {
-    background-color: #ff1414;
+    background-color: transparent;
     margin-bottom: 10px;
     padding: 15px;
     border-radius: 8px;
@@ -145,7 +139,7 @@ body {
 }
 
 .reglas-list li:hover {
-    background-color: #f0f0f0;
+    background-color: tra;
 }
 
 .reglas-list li:active {
@@ -334,3 +328,18 @@ button:hover {
   background-color: #005fa3;
 }
 
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in-zoom {
+  animation: fadeInZoom 0.8s ease-out forwards;
+  opacity: 0; /* importante para que no se vea antes */
+}
