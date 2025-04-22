@@ -1,102 +1,178 @@
----
-const menu = [
-  { name: "Inicio", link: "/" },
-  { name: "Inscripción", link: "/inscripcion" },
-  {
-    name: "Pago",
-    link: "/pago",
-    dropdown: [
-      { name: "Tarjeta", link: "/pago/tarjeta" },
-      { name: "Transferencia", link: "/pago/transferencia" },
-    ]
-  }
-];
----
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="/" class="brand-logo transition duration-300 hover:brightness-110">
+      <img src="/images/logo111.png" alt="Logo" class="h-10 w-auto" />
+    </a>
+    
 
-<header class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white fixed w-full top-0 left-0 z-50 shadow-lg backdrop-blur-md">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="text-2xl font-bold tracking-wide">⚽ Campeonato</div>
-
-    <button id="menu-toggle" class="md:hidden text-3xl focus:outline-none transition hover:scale-110">
-      ☰
-    </button>
-
-    <ul class="hidden md:flex space-x-8 text-lg items-center font-medium">
-      {menu.map((item) => (
-        <li class="relative group">
-          {item.dropdown && (
-            <div>
-              <button class="flex items-center hover:text-yellow-300 transition">
-                {item.name} <span class="ml-1">▼</span>
-              </button>
-              <ul class="absolute hidden group-hover:block bg-white text-black rounded shadow-lg mt-2 w-44 animate-fade-in">
-                {item.dropdown.map((sub) => (
-                  <li>
-                    <a href={sub.link} class="block px-4 py-2 hover:bg-indigo-100 transition">
-                      {sub.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {!item.dropdown && (
-            <a href={item.link} class="hover:text-yellow-300 transition">{item.name}</a>
-          )}
-        </li>
-      ))}
+    <!-- Enlaces del navbar en la versión de escritorio -->
+    <ul class="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/equipos">Equipos</a></li>
+      <li><a href="/reglas">Reglas</a></li>
+      <li><a href="/inscripcion">Inscripcion</a></li>
+      <li><a href="/contacto">Contacto</a></li>
     </ul>
+
+    <!-- Menú hamburguesa -->
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
   </div>
 
   <!-- Menú móvil -->
-  <ul id="mobile-menu" class="md:hidden hidden flex flex-col bg-indigo-700 px-4 py-2 space-y-2 text-lg transition-all duration-300">
-    {menu.map((item) => (
-      <li>
-        {item.dropdown && (
-          <details>
-            <summary class="cursor-pointer py-2 hover:underline">{item.name}</summary>
-            <ul class="pl-4">
-              {item.dropdown.map((sub) => (
-                <li>
-                  <a href={sub.link} class="block py-1 hover:underline">{sub.name}</a>
-                </li>
-              ))}
-            </ul>
-          </details>
-        )}
-        {!item.dropdown && (
-          <a href={item.link} class="block py-2 hover:underline">{item.name}</a>
-        )}
-      </li>
-    ))}
+  <ul class="mobile-menu">
+    <li><a href="#home">Inicio</a></li>
+    <li><a href="#features">Características</a></li>
+    <li><a href="#pricing">Precios</a></li>
+    <li><a href="#about">Acerca de</a></li>
+    <li><a href="#contact">Contacto</a></li>
   </ul>
-</header>
+</nav>
+
+<script>
+  // Manejador para mostrar/ocultar el menú móvil
+  function toggleMenu() {
+    const menu = document.querySelector('.mobile-menu');
+    menu.classList.toggle('active');
+  }
+</script>
 
 <style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Global reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.3s ease-out forwards;
+
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(135deg, #00bfff, #ff7f50); /* Gradiente elegante */
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Contenedor principal del navbar */
+  .navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Logo */
+  .brand-logo {
+    font-size: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+    flex-grow: 1; /* Permite que el logo ocupe el espacio disponible */
+  }
+
+  .brand-logo:hover {
+    color: #ec9410;
+  }
+
+  /* Estilo para los enlaces de navegación en la versión de escritorio */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    flex-grow: 2; /* Evita que los enlaces se apilen o se superpongan */
+    justify-content: flex-end; /* Alinea los enlaces a la derecha */
+  }
+
+  .nav-links li {
+    position: relative;
+  }
+
+  .nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .nav-links li a:hover {
+    color: #ffeb3b;
+    transform: scale(1.05);
+  }
+
+  /* Estilo del menú móvil */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-100%);
+  }
+
+  .mobile-menu.active {
+    transform: translateY(0);
+  }
+
+  .mobile-menu li {
+    list-style: none;
+  }
+
+  .mobile-menu li a {
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 12px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+  }
+
+  .mobile-menu li a:hover {
+    color: #ffeb3b;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .hamburger {
+      display: block;
+      position: absolute;
+      right: 20px; /* Mueve el botón hamburguesa hacia la derecha */
+    }
+
+    .mobile-menu {
+      display: flex;
+    }
   }
 </style>
-
-<script is:global>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    toggle?.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  });
-</script>

@@ -1,26 +1,11 @@
 ---
-const options: ISourceOptions = {
-  background: { color: "#8d0000" }, // <-- este no se verá, sirve para fallback
-  fullScreen: { enable: true, zIndex: -1 },
-  particles: {
-    number: { value: 100 },
-    move: { enable: true, speed: 2 },
-    color: { value: "#ffffff" },
-    shape: { type: "circle" },
-    size: { value: 3 }
-  }
-};
-
-const menu = [
-  { name: "Inicio", link: "/" },
-  { name: "Equipos", link: "/equipos" },
-  { name: "Reglas", link: "/reglas" },
-  { name: "Contacto", link: "/contacto" },
-];
+import Navbar from '../components/menu.astro';  // Importar el componente
 ---
 
 <html lang="es">
   <head>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
     <meta charset="UTF-8" />
     <title>Campeonato</title>
     <style>
@@ -102,9 +87,69 @@ const menu = [
 }
 
     </style>
+    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+    <script>
+      tsParticles.load("tsparticles", {
+        fullScreen: { enable: true },  // Esto asegura que cubra toda la pantalla
+        background: {
+          color: {
+            value: "#ffffff"  // Color del fondo donde se vean las partículas (puedes cambiarlo a transparente si lo prefieres)
+          }
+        },
+        particles: {
+          number: {
+            value: 60,
+            density: {
+              enable: true,
+              area: 800
+            }
+          },
+          color: {
+            value: "#0e51ee"  // Color de las partículas
+          },
+          shape: {
+            type: "circle"  // Puedes cambiar esto a otros tipos de formas si lo prefieres
+          },
+          opacity: {
+            value: 0.4
+          },
+          size: {
+            value: { min: 1, max: 4 }
+          },
+          move: {
+            enable: true,
+            speed: 1,
+            direction: "none",
+            random: false,
+            straight: false,
+            outModes: {
+              default: "out"
+            }
+          }
+        },
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "repulse"
+            },
+            resize: true
+          },
+          modes: {
+            repulse: {
+              distance: 100
+            }
+          }
+        }
+      });
+    </script>
+    
+    
   </head>
   <body>
+    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full -z-10"></div>
 
+  <Navbar/>
 <!-- Loader con desplazamiento dual y spinner -->
 <div id="loader-container">
   <div class="loader-top">
@@ -115,8 +160,6 @@ const menu = [
   </div>
   <div class="loader-bottom"></div>
 </div>
-
-
 <script>
   function hideLoader() {
     const loader = document.getElementById('loader-container');
@@ -132,10 +175,6 @@ const menu = [
   // Fallback por si falla el evento load (por ejemplo en navegaciones rápidas)
   setTimeout(hideLoader, 5000);
 </script>
-
-
-    <!-- Tu contenido normal comienza aquí -->
-
 <html lang="es">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -143,20 +182,7 @@ const menu = [
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <!-- ✅ Contenido -->
-    <header class="bg-blue-600 text-white p-4 relative z-10">
-      <nav class="flex justify-between items-center">
-        <div class="text-xl font-bold">Campeonato</div>
-        <button id="menu-btn" class="md:hidden text-white text-2xl">☰</button>
-        <ul id="menu" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-          {menu.map((item) => (
-            <li class="relative">
-              <a href={item.link} class="hover:underline">{item.name}</a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+
 
     <main class="flex-grow flex flex-col items-center justify-center text-center px-4 relative z-10">
       <slot />
@@ -170,20 +196,6 @@ const menu = [
       <i class="fab fa-whatsapp"></i>
     </a>
 
-<script>
-  function hideLoader() {
-    const loader = document.getElementById('loader-container');
-    if (loader) {
-      loader.classList.add('hidden');
-      setTimeout(() => loader.remove(), 800); // coincide con tu transition
-    }
-  }
-  // Fallback por si algo falla
-  setTimeout(hideLoader, 5000);
-</script>
-
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.37.0/tsparticles.min.js"></script>
-    <script></script>
   </body>
 </html>
   </html>

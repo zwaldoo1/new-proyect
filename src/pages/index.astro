@@ -3,10 +3,19 @@ import Footer from "../components/Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Carrusel from "../components/carrusel.astro";
 ---
-
 <BaseLayout>
   <body class="bg-animated">
-
+    <head>
+      <!-- Materialize CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+      
+      <!-- Material Icons (si usas íconos de Materialize) -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+      <!-- Tu archivo global CSS (si lo tienes) -->
+      <link rel="stylesheet" href="../styles/global.css" />
+    </head>
+    
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const sections = document.querySelectorAll("[data-scroll]");
@@ -47,47 +56,164 @@ import Carrusel from "../components/carrusel.astro";
       </a>
     </div>
   </main>
+
   <Carrusel/>
-  <section class="min-h-screen bg-gray-900 flex items-center justify-center py-20 px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl w-full">
-      
+  <div class="container cards-container">
+    <div class="row">
       <!-- Tarjeta 1 -->
-      <div class="group relative h-96 overflow-hidden rounded-2xl bg-blue-500 shadow-lg transition-all duration-500 hover:w-[150%] w-full cursor-pointer">
-        <div class="absolute inset-0 bg-cover bg-center transition-all duration-500 group-hover:scale-110" style="background-image: url('https://source.unsplash.com/800x1000/?soccer')"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-60 group-hover:bg-opacity-80 transition duration-500 flex flex-col justify-end p-6 text-white">
-          <h3 class="text-2xl font-bold mb-2">Equipo A</h3>
-          <p class="opacity-0 group-hover:opacity-100 transition duration-500 text-sm">
-            Somos un equipo comprometido con la victoria y el trabajo en equipo.
-          </p>
+      <div class="col s12 m6 l4">
+        <div class="card futuristic-card">
+          <div class="card-image">
+            <img src="https://picsum.photos/400/200?random=1" alt="Imagen 1">
+            <span class="card-title"></span>
+          </div>
+          <div class="card-content">
+            <p><i class="material-icons">info</i> Breve descripción de la tarjeta 1.</p>
+          </div>
+          <!-- Descripción adicional que se despliega al pasar el mouse -->
+          <div class="description">
+            <p><strong>Información completa:</strong></p>
+            <p>Este es un texto más detallado sobre la tarjeta 1. Puedes poner aquí toda la información que desees para proporcionar más contexto o detalles.</p>
+          </div>
         </div>
       </div>
   
       <!-- Tarjeta 2 -->
-      <div class="group relative h-96 overflow-hidden rounded-2xl bg-green-500 shadow-lg transition-all duration-500 hover:w-[150%] w-full cursor-pointer">
-        <div class="absolute inset-0 bg-cover bg-center transition-all duration-500 group-hover:scale-110" style="background-image: url('https://source.unsplash.com/800x1000/?football')"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-60 group-hover:bg-opacity-80 transition duration-500 flex flex-col justify-end p-6 text-white">
-          <h3 class="text-2xl font-bold mb-2">Equipo B</h3>
-          <p class="opacity-0 group-hover:opacity-100 transition duration-500 text-sm">
-            La pasión por el deporte nos une y nos impulsa a mejorar cada día.
-          </p>
+      <div class="col s12 m6 l4">
+        <div class="card futuristic-card">
+          <div class="card-image">
+            <img src="https://picsum.photos/400/200?random=2" alt="Imagen 2">
+            <span class="card-title"></span>
+          </div>
+          <div class="card-content">
+            <p><i class="material-icons">event</i> Otra descripción breve para tarjeta 2.</p>
+          </div>
+          <!-- Descripción adicional que se despliega al pasar el mouse -->
+          <div class="description">
+            <p><strong>Información completa:</strong></p>
+            <p>Este es un texto más detallado sobre la tarjeta 2. Aquí puedes ofrecer más información relevante o interactiva para el usuario.</p>
+          </div>
         </div>
       </div>
   
       <!-- Tarjeta 3 -->
-      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-      <div class="group relative h-96 overflow-hidden rounded-2xl bg-red-500 shadow-lg transition-all duration-500 hover:w-[150%] w-full cursor-pointer">
-        <div class="absolute inset-0 bg-cover bg-center transition-all duration-500 group-hover:scale-110" style="background-image: url('https://source.unsplash.com/800x1000/?sports')"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-60 group-hover:bg-opacity-80 transition duration-500 flex flex-col justify-end p-6 text-white">
-          <h3 class="text-2xl font-bold mb-2">Equipo C</h3>
-          <p class="opacity-0 group-hover:opacity-100 transition duration-500 text-sm">
-            Más que un equipo, somos una familia dentro y fuera del campo.
-          </p>
+      <div class="col s12 m6 l4">
+        <div class="card futuristic-card">
+          <div class="card-image">
+            <img src="https://picsum.photos/400/200?random=3" alt="Imagen 3">
+            <span class="card-title"></span>
+          </div>
+          <div class="card-content">
+            <p><i class="material-icons">star</i> Texto llamativo para tarjeta 3.</p>
+          </div>
+          <!-- Descripción adicional que se despliega al pasar el mouse -->
+          <div class="description">
+            <p><strong>Información completa:</strong></p>
+            <p>Este es un texto más detallado sobre la tarjeta 3. Asegúrate de proporcionar información útil o detallada sobre lo que representa esta tarjeta.</p>
+          </div>
         </div>
       </div>
-  
     </div>
-  </section>
+  </div>
   
+  
+<style>
+ /* Estilo general para las tarjetas */
+.card.futuristic-card {
+  position: relative;
+  background: linear-gradient(135deg, #6a5acd, #00bfff); /* Gradiente futurista */
+  border-radius: 15px; /* Bordes redondeados */
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+  color: #fff;
+  text-align: center;
+}
+
+/* Efecto de hover: eleva la tarjeta y agrega un resplandor */
+.card.futuristic-card:hover {
+  transform: translateY(-15px) scale(1.05); /* Efecto 3D de elevación */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+}
+
+/* Efecto en la imagen */
+.card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Efecto de brillo en la imagen al hacer hover */
+.card.futuristic-card:hover .card-image img {
+  filter: brightness(1);
+}
+
+/* Estilo del título de la tarjeta */
+.card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  color: #ffeb3b;
+  transition: color 0.3s ease;
+}
+
+/* Descripción que aparece al pasar el mouse */
+.description {
+  display: none;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  transition: transform 0.4s ease-in-out;
+  transform: translateY(100%);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+  border-top: 2px solid #00bfff;
+}
+
+/* Mostrar la descripción al hacer hover */
+.card.futuristic-card:hover .description {
+  transform: translateY(0); /* La descripción aparece deslizándose */
+  display: block;
+}
+
+/* Estilo del contenido */
+.card-content p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Efecto de brillo en el contenido al hacer hover */
+.card.futuristic-card:hover .card-content p {
+  color: #ffeb3b;
+}
+
+/* Estilo para el ícono de la tarjeta */
+.material-icons {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #00bfff;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Efecto de cambio de color en el ícono al hacer hover */
+.card.futuristic-card:hover .material-icons {
+  color: #ffeb3b;
+}
+
+</style>
+
 <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
   <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Contáctanos</h2>
 
@@ -168,27 +294,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   
-  <!-- Sección de Preguntas Frecuentes -->
-  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Preguntas Frecuentes</h2>
-  </section>
-  
-    <div class="space-y-4">
-      
-      <div>
-        <iv class="opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>¿Cuántos jugadores por equipo?</h3>
-        <p class="text-gray-600">Cada equipo debe tener 7 jugadores, y pueden agregar hasta 3 suplentes.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg text-gray-800">¿Cómo se realiza el pago?</h3>
-        <p class="text-gray-600">Puedes elegir entre pagar con tarjeta o mediante transferencia bancaria.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg text-gray-800">¿Cuál es la fecha límite para inscribirse?</h3>
-        <p class="text-gray-600">Las inscripciones estarán abiertas hasta que se completen los 8 equipos o hasta la fecha límite.</p>
-      </div>
+<!-- Sección de Preguntas Frecuentes -->
+<section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <h2 class="text-3xl font-bold text-white text-center mb-8">Preguntas Frecuentes</h2>
+
+  <div class="space-y-6 max-w-3xl mx-auto">
+    
+    <div class="bg-white text-gray-800 rounded-lg p-6 shadow-md opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+      <h3 class="font-semibold text-lg mb-2">¿Cuántos jugadores por equipo?</h3>
+      <p>Cada equipo debe tener 7 jugadores, y pueden agregar hasta 3 suplentes.</p>
     </div>
-  </section>
+
+    <div class="bg-white text-gray-800 rounded-lg p-6 shadow-md opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+      <h3 class="font-semibold text-lg mb-2">¿Cómo se realiza el pago?</h3>
+      <p>Puedes elegir entre pagar con tarjeta o mediante transferencia bancaria.</p>
+    </div>
+
+    <div class="bg-white text-gray-800 rounded-lg p-6 shadow-md opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+      <h3 class="font-semibold text-lg mb-2">¿Cuál es la fecha límite para inscribirse?</h3>
+      <p>Las inscripciones estarán abiertas hasta que se completen los 8 equipos o hasta la fecha límite.</p>
+    </div>
+
+  </div>
+</section>
+
 
   <a href="#inscripcion" class="fixed bottom-6 right-6 bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition transform">
     ¡Inscríbete ahora!
