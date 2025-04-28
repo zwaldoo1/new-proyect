@@ -4,12 +4,13 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout/>
-<main class="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-xl space-y-6">
+<main class="bg-transparent py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto p-8 rounded-xl shadow-xl bg-blue-500/20 backdrop-blur-md space-y-6">
     <h2 class="text-3xl font-semibold text-center text-blue-600">Reglas del Torneo</h2>
 
-    <a href="/equipos" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
+    <a href="/equipos" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
       <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
         <i class="fas fa-users text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
         1. Equipos
@@ -19,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </a>
     
-    <a href="/inscripcion" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
+    <a href="/inscripcion" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
       <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
         <i class="fas fa-clipboard-list text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
         2. Inscripción
@@ -29,7 +30,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </a>
     
-    <a href="/reglas" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
+    <a href="/reglas" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
       <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
         <i class="fas fa-futbol text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
         3. Reglas de Juego
@@ -39,7 +40,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </a>
     
-    <a href="/" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
+    <a href="/" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
       <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
         <i class="fas fa-handshake text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
         4. Fair Play
@@ -48,9 +49,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         El respeto mutuo entre los jugadores y equipos es fundamental. Cualquier conducta antideportiva será sancionada con la descalificación del equipo.
       </p>
     </a>
-    
-    
-    
   </div>
 </main>
 <BaseLayout/>

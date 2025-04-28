@@ -1,14 +1,59 @@
 ---
 import Navbar from '../components/menu.astro';  // Importar el componente
----
 
+---
 <html lang="es">
   <head>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-
     <meta charset="UTF-8" />
     <title>Campeonato</title>
+    <div class="video-background">
+      <video autoplay muted loop playsinline>
+        <source src="/images/video1.mp4" type="video/mp4">
+        Tu navegador no soporta videos en HTML5.
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    
+    <!-- CONTENIDO PRINCIPAL (Todo lo visible) -->
+    <div class="contenido-principal">
+      <header>
+    </div>    
     <style>
+      /* Fondo de video */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -10; /* MÁS BAJO */
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -9; /* También bajo */
+}
+
+/* Contenido encima del video */
+.contenido-principal {
+  position: relative;
+  z-index: 1; /* ARRIBA DEL VIDEO */
+  padding: 20px;
+  color: white;
+}
+
 #loader-container {
   position: fixed;
   top: 0;
@@ -29,7 +74,7 @@ import Navbar from '../components/menu.astro';  // Importar el componente
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.6s ease-in-out; /* antes tenías 0.8s, lo bajamos un poco */
+  transition: transform 0.4s ease-in-out; /* antes tenías 0.8s, lo bajamos un poco */
 }
 
 .loader-top {
@@ -79,7 +124,7 @@ import Navbar from '../components/menu.astro';  // Importar el componente
 }
 
 {
-  transition: transform 0.5s ease-in-out; /* en vez de 0.8s */
+  transition: transform 0.3s ease-in-out; /* en vez de 0.8s */
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -87,68 +132,8 @@ import Navbar from '../components/menu.astro';  // Importar el componente
 }
 
     </style>
-    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full -z-10"></div>
-    <script>
-      tsParticles.load("tsparticles", {
-        fullScreen: { enable: true },  // Esto asegura que cubra toda la pantalla
-        background: {
-          color: {
-            value: "#ffffff"  // Color del fondo donde se vean las partículas (puedes cambiarlo a transparente si lo prefieres)
-          }
-        },
-        particles: {
-          number: {
-            value: 60,
-            density: {
-              enable: true,
-              area: 800
-            }
-          },
-          color: {
-            value: "#0e51ee"  // Color de las partículas
-          },
-          shape: {
-            type: "circle"  // Puedes cambiar esto a otros tipos de formas si lo prefieres
-          },
-          opacity: {
-            value: 0.4
-          },
-          size: {
-            value: { min: 1, max: 4 }
-          },
-          move: {
-            enable: true,
-            speed: 1,
-            direction: "none",
-            random: false,
-            straight: false,
-            outModes: {
-              default: "out"
-            }
-          }
-        },
-        interactivity: {
-          events: {
-            onHover: {
-              enable: true,
-              mode: "repulse"
-            },
-            resize: true
-          },
-          modes: {
-            repulse: {
-              distance: 100
-            }
-          }
-        }
-      });
-    </script>
-    
-    
   </head>
   <body>
-    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full -z-10"></div>
-
   <Navbar/>
 <!-- Loader con desplazamiento dual y spinner -->
 <div id="loader-container">
@@ -195,7 +180,30 @@ import Navbar from '../components/menu.astro';  // Importar el componente
     <a href="https://wa.me/+56951616431" target="_blank" class="fixed bottom-20 right-20 bg-green-500 text-white p-4 rounded-full shadow-lg text-2xl hover:scale-110 transition flex items-center justify-center z-20">
       <i class="fab fa-whatsapp"></i>
     </a>
+<!-- Flecha de desplazamiento hacia arriba -->
+<button id="scrollTopBtn" class="scroll-top-btn">
+  ↑
+</button>
+<script>
+  // Obtenemos el botón de la flecha
+const scrollTopBtn = document.getElementById('scrollTopBtn');
 
+// Mostrar la flecha cuando el usuario baje 300px desde la parte superior
+window.onscroll = function () {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    scrollTopBtn.classList.add('show'); // Muestra el botón
+  } else {
+    scrollTopBtn.classList.remove('show'); // Oculta el botón
+  }
+};
+
+// Función para desplazar suavemente hacia arriba
+scrollTopBtn.onclick = function () {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+</script>
   </body>
 </html>
   </html>
+  

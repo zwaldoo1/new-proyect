@@ -388,3 +388,64 @@ button:hover {
 body {
   overflow-x: hidden;
 }
+/* Estilos para la flecha de desplazamiento hacia arriba */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px; /* Coloca la flecha en la parte inferior */
+  right: 20px;  /* Coloca la flecha a la derecha */
+  background-color: #ff7f50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+  display: none; /* La flecha estará oculta al principio */
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-top-btn:hover {
+  background-color: #00bfff; /* Cambia de color cuando se pasa el mouse */
+}
+
+/* Opcional: animación de aparición */
+.scroll-top-btn.show {
+  display: block;
+}
+.video-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-background .contenido {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding-top: 20%;
+}
+
+.video-background::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* oscurece el video */
+  z-index: 0;
+}

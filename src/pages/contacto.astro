@@ -3,12 +3,12 @@ title: "Contacto"
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 ---
+
 <styles/>
 <BaseLayout/>
-<main class="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-xl">
+<main class="bg-transparent min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto bg-white/20 backdrop-blur-md p-8 rounded-xl shadow-xl">
     <h2 class="text-3xl font-semibold text-center text-blue-600">¡Contáctanos!</h2>
     <p class="mt-2 text-center text-gray-600">Si tienes alguna pregunta o duda, no dudes en escribirnos. Estaremos encantados de ayudarte.</p>
 
@@ -63,5 +63,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </form>
   </div>
 </main>
-<BaseLayout/>
 <Footer/>

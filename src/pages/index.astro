@@ -3,6 +3,7 @@ import Footer from "../components/Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Carrusel from "../components/carrusel.astro";
 ---
+
 <BaseLayout>
   <body class="bg-animated">
     <head>
@@ -35,7 +36,7 @@ import Carrusel from "../components/carrusel.astro";
       sections.forEach(section => observer.observe(section));
     });
   </script>
-  
+<div>  
   <!-- Agrega el Navbar aquí -->
   <main class="flex flex-col items-center justify-center text-center px-4">
     <!-- Primer título -->
@@ -214,7 +215,9 @@ import Carrusel from "../components/carrusel.astro";
 
 </style>
 
-<section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+<section class="mt-12 bg-white/10 backdrop-blur-md p-8 rounded-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+
+
   <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Contáctanos</h2>
 
   <div class="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -242,7 +245,8 @@ import Carrusel from "../components/carrusel.astro";
   </div>
 </section>
 
-<section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+<section class="mt-12 p-8 bg-blue-500/20 backdrop-blur-md text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+
   <h2 class="text-3xl font-bold text-center mb-4">¡Conéctate con Nosotros!</h2>
   <p class="text-center text-lg mb-6">Síguenos en nuestras redes y entérate de todas las novedades.</p>
 
@@ -295,7 +299,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
 <!-- Sección de Preguntas Frecuentes -->
-<section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+<section class="mt-12 p-8 bg-blue-500/20 backdrop-blur-md text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+
   <h2 class="text-3xl font-bold text-white text-center mb-8">Preguntas Frecuentes</h2>
 
   <div class="space-y-6 max-w-3xl mx-auto">
@@ -324,7 +329,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   </a>
-  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <section class="mt-12 p-8 bg-blue-500/20 backdrop-blur-md text-white font-semibold text-lg rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6"></h2>Formulario de Inscripción</h2>
   <p class="text-gray-600 mb-6">Completa el formulario para inscribirte.</p>
 
@@ -336,15 +342,15 @@ document.addEventListener("DOMContentLoaded", function () {
     </button>
   </form>
 </section>
-  
-
-  
   <!-- Asesoramiento en Vivo -->
-  <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700" data-scroll>
+  <section class="mt-12 p-8 bg-blue-500/30 backdrop-blur-sm text-white font-semibold text-lg rounded-lg shadow-md opacity-90 transform translate-y-10 transition-all duration-700" data-scroll>
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">¿Tienes dudas sobre el pago?</h2>
-  <p class="text-gray-600 mb-4">Escríbenos y te ayudaremos en minutos.</p>
-  <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-
+    <p class="text-gray-600 mb-4">Escríbenos y te ayudaremos en minutos.</p>
+    <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+      <!-- Aquí irían los botones o enlaces -->
+    </div>
+  </section>
+  
     <!-- Botón de WhatsApp -->
     <a href="https://wa.me/XXXXXXXXXXX" target="_blank" 
        class="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-600 transition flex items-center">

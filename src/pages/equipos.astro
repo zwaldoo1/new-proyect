@@ -3,35 +3,30 @@ title: "Equipos Inscritos"
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 ---
 
 <BaseLayout/>
-<main class="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-xl space-y-6">
-    <h2 class="text-3xl font-semibold text-center text-blue-600">Equipos Inscritos</h2>
-    <p class="mt-2 text-center text-gray-600">Aquí puedes ver los equipos que se han inscrito hasta el momento.</p>
+<main class="bg-transparent py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto p-8 rounded-xl shadow-xl bg-blue-500/20 backdrop-blur-md space-y-6">
+    <h2 class="text-3xl font-semibold text-center text-white-600">Equipos Inscritos</h2>
+    <p class="mt-2 text-center text-whithe-600">Aquí puedes ver los equipos que se han inscrito hasta el momento.</p>
 
-<!-- Lista de Equipos -->
-<div class="mt-8 space-y-4">
-  <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
-    <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Guerreros</h3>
-    <span class="text-gray-500">Contacto: 123-456-7890</span>
-  </div>
+    <!-- Lista de Equipos -->
+    <div class="mt-8 space-y-4">
+      <div class="flex justify-between items-center p-4 bg-gray-100/40 backdrop-blur-sm rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Guerreros</h3>
+        <span class="text-gray-500">Contacto: 123-456-7890</span>
+      </div>
 
-  <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
-    <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Tigres</h3>
-    <span class="text-gray-500">Contacto: tigres@email.com</span>
-  </div>
+      <div class="flex justify-between items-center p-4 bg-gray-100/40 backdrop-blur-sm rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Tigres</h3>
+        <span class="text-gray-500">Contacto: tigres@email.com</span>
+      </div>
 
-  <div class="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
-    <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Águilas</h3>
-    <span class="text-gray-500">Contacto: 987-654-3210</span>
-  </div>
-</div>
-
-
-      <!-- Añadir más equipos -->
+      <div class="flex justify-between items-center p-4 bg-gray-100/40 backdrop-blur-sm rounded-lg shadow-md transition transform hover:scale-105 hover:bg-blue-100 hover:shadow-lg">
+        <h3 class="text-lg font-semibold text-gray-800">Equipo: Los Águilas</h3>
+        <span class="text-gray-500">Contacto: 987-654-3210</span>
+      </div>
     </div>
   </div>
 </main>
