@@ -1,55 +1,114 @@
 ---
-title: "Reglas del Torneo"
+title: "Bases del Campeonato"
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout/>
-<main class="bg-transparent py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto p-8 rounded-xl shadow-xl bg-blue-500/20 backdrop-blur-md space-y-6">
-    <h2 class="text-3xl font-semibold text-center text-blue-600">Reglas del Torneo</h2>
+<BaseLayout />
+<main class="bg-transparent py-16 px-4 sm:px-6 lg:px-8 min-h-screen">
+  <div class="max-w-4xl mx-auto p-10 rounded-3xl bg-white/60 backdrop-blur-md shadow-2xl space-y-12">
+    
+    <h1 class="text-5xl font-extrabold text-center bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
+      Bases del Campeonato
+    </h1>
 
-    <a href="/equipos" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
-      <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
-        <i class="fas fa-users text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
-        1. Equipos
-      </h3>
-      <p class="text-gray-700 leading-relaxed">
-        Cada equipo deberá estar compuesto por un máximo de 7 jugadores, incluyendo los suplentes. Los suplentes serán un máximo de 3 personas.
-      </p>
-    </a>
-    
-    <a href="/inscripcion" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
-      <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
-        <i class="fas fa-clipboard-list text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
-        2. Inscripción
-      </h3>
-      <p class="text-gray-700 leading-relaxed">
-        La inscripción de los equipos estará abierta hasta que se completen todos los cupos disponibles. Los equipos deberán completar el formulario de inscripción en línea.
-      </p>
-    </a>
-    
-    <a href="/reglas" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
-      <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
-        <i class="fas fa-futbol text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
-        3. Reglas de Juego
-      </h3>
-      <p class="text-gray-700 leading-relaxed">
-        El torneo se jugará con reglas estándar de fútbol. Cada equipo tendrá 20 minutos por partido, con descanso de 5 minutos entre ellos.
-      </p>
-    </a>
-    
-    <a href="/" class="block group space-y-3 p-6 rounded-xl border border-blue-200 bg-white/20 backdrop-blur-md hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:shadow-xl transition-all duration-300">
-      <h3 class="text-2xl font-bold text-blue-700 flex items-center gap-2">
-        <i class="fas fa-handshake text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
-        4. Fair Play
-      </h3>
-      <p class="text-gray-700 leading-relaxed">
-        El respeto mutuo entre los jugadores y equipos es fundamental. Cualquier conducta antideportiva será sancionada con la descalificación del equipo.
-      </p>
-    </a>
+<p class="text-white text-lg leading-relaxed text-center max-w-3xl mx-auto">
+  Aquí encontrarás todas las condiciones, reglas y normas que rigen el torneo, para que equipos y jugadores puedan competir de manera justa y organizada.
+</p>
+
+
+    <div class="text-center">
+      <a
+        href="/docs/bases-campeonato.pdf"
+        download
+        class="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-blue-800 transition duration-300 active:scale-95"
+        aria-label="Descargar Bases del Campeonato en PDF"
+      >
+        📥 Descargar Bases en PDF
+      </a>
+    </div>
+
+    <section class="space-y-8">
+      {[
+        {
+          icon: "fas fa-users",
+          title: "Equipos Participantes",
+          content:
+            "Cada equipo deberá estar compuesto por un máximo de 7 jugadores, incluyendo hasta 3 suplentes. Todos los jugadores deben estar inscritos previamente y cumplir con los requisitos establecidos por la organización.",
+        },
+        {
+          icon: "fas fa-clipboard-list",
+          title: "Inscripción",
+          content:
+            "La inscripción estará abierta hasta completar los cupos disponibles. El proceso se realiza exclusivamente a través del formulario en línea, el cual debe ser completado en su totalidad para ser válido.",
+        },
+        {
+          icon: "fas fa-futbol",
+          title: "Reglas del Juego",
+          content:
+            "Los partidos se jugarán bajo reglas estándar de fútbol 7. Cada encuentro tendrá una duración de 20 minutos con un descanso de 5 minutos entre partidos. Se aplicará sistema de eliminación directa.",
+        },
+        {
+          icon: "fas fa-handshake",
+          title: "Fair Play",
+          content:
+            "El respeto entre equipos, árbitros y organización es obligatorio. Cualquier conducta antideportiva será sancionada, pudiendo derivar en la descalificación inmediata del equipo infractor.",
+        },
+        {
+          icon: "fas fa-trophy",
+          title: "Premios",
+          content:
+            "Se entregarán trofeos, medallas y premios en efectivo a los equipos ganadores. Además, habrá reconocimientos especiales para el mejor jugador y el equipo con mejor comportamiento.",
+        },
+        {
+          icon: "fas fa-cloud-sun-rain",
+          title: "Condiciones Climáticas",
+          content:
+            "En caso de condiciones climáticas adversas, la organización podrá suspender o reprogramar partidos. Se informará oportunamente a través de los canales oficiales.",
+        },
+        {
+          icon: "fas fa-shield-alt",
+          title: "Responsabilidad",
+          content:
+            "La organización no se responsabiliza por lesiones o accidentes ocurridos durante el torneo. Se recomienda a los participantes contar con seguro deportivo.",
+        },
+      ].map(({ icon, title, content }) => (
+        <article
+          class="group p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-blue-300 shadow-md transition transform hover:scale-[1.03] hover:shadow-xl duration-300 cursor-pointer"
+          tabindex="0"
+          role="region"
+          aria-labelledby={`section-${title.replace(/\s+/g, "-").toLowerCase()}`}
+        >
+          <h2
+            id={`section-${title.replace(/\s+/g, "-").toLowerCase()}`}
+            class="flex items-center gap-4 text-3xl font-bold text-blue-800 group-hover:text-white transition-colors duration-300"
+          >
+            <i
+              class={`${icon} text-blue-500 text-4xl group-hover:scale-110 group-hover:text-white transition-transform duration-300`}
+              aria-hidden="true"
+            ></i>
+            {title}
+          </h2>
+          <p class="mt-4 text-gray-900 group-hover:text-white leading-relaxed transition-colors duration-300">{content}</p>
+        </article>
+      ))}
+    </section>
   </div>
 </main>
-<BaseLayout/>
-<Footer/>
+<Footer />
+
+<style>
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 6s ease infinite;
+  }
+</style>
