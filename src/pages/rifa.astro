@@ -12,11 +12,11 @@ const PAGE_SIZE = 100;
       Haz clic en un número para comprarlo. Los números ya comprados aparecerán en rojo y deshabilitados.
     </p>
 
-    <div 
-      id="rifa-grid" 
+    <div
+      id="rifa-grid"
       class="grid grid-cols-10 gap-1 max-h-[500px] overflow-y-auto bg-white p-2 rounded shadow text-xs text-center text-black w-full max-w-4xl"
     >
-      <!-- Aquí se insertarán los botones con JS -->
+      <!-- Los botones se insertan con JS -->
     </div>
 
     <button id="load-more" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
@@ -25,89 +25,90 @@ const PAGE_SIZE = 100;
   </main>
 
   <script type="module" is:inline>
-    const TOTAL_NUMEROS = ${TOTAL_NUMEROS};
-    const PAGE_SIZE = ${PAGE_SIZE};
-    const reservedNumbers = new Set();
-    let currentMax = PAGE_SIZE;
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js';
+    import { getFirestore, collection, onSnapshot, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('rifa-grid');
-      const loadMoreBtn = document.getElementById('load-more');
+    const firebaseConfig = {
+      apiKey: "AIzaSyDrn2-siV9XZxms0caGwz6kA1bCM4i5kgM",
+      authDomain: "campeonato-v1.firebaseapp.com",
+      projectId: "campeonato-v1",
+    };
 
-      // Mostrar texto mientras carga los datos
-      grid.textContent = 'Cargando números...';
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-      function renderButtons() {
-        grid.textContent = ''; // Limpiar mensaje de carga
+    const TOTAL_NUMEROS = 10000;
+    const PAGE_SIZE = 100;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const grid = document.getElementById("rifa-grid");
+      const loadMoreBtn = document.getElementById("load-more");
+
+      let reservedNumbers = new Set();
+      let currentMax = PAGE_SIZE;
+
+      // Render inicial: botones verdes sin saber reservados aún
+      function renderInitialButtons() {
+        grid.textContent = "";
         for (let i = 1; i <= currentMax && i <= TOTAL_NUMEROS; i++) {
-          const btn = document.createElement('button');
+          const btn = document.createElement("button");
           btn.textContent = i;
-          btn.className = reservedNumbers.has(i.toString()) 
-            ? 'py-1 rounded bg-red-500 cursor-not-allowed' 
-            : 'py-1 rounded bg-green-500 hover:bg-green-700';
-          btn.disabled = reservedNumbers.has(i.toString());
-          btn.addEventListener('click', () => handleSelect(i));
+          btn.className = "py-1 rounded bg-green-500 hover:bg-green-700";
+          btn.disabled = false;
+          btn.addEventListener("click", () => handleSelect(i));
           grid.appendChild(btn);
-        }
-
-        if (currentMax >= TOTAL_NUMEROS) {
-          loadMoreBtn.style.display = 'none';
-        } else {
-          loadMoreBtn.style.display = 'block';
         }
       }
 
-      async function fetchReserved() {
-        try {
-          const res = await fetch('/api/numeros-reservados');
-          if (!res.ok) {
-            console.error('Error al obtener números reservados:', res.statusText);
-            grid.textContent = 'Error al cargar números.';
-            return;
-          }
-          const data = await res.json();
-          data.forEach(num => reservedNumbers.add(num.toString()));
-        } catch (error) {
-          console.error('Error en fetchReserved:', error);
-          grid.textContent = 'Error al cargar números.';
+      // Render actualizado con números reservados en rojo y deshabilitados
+      function renderButtons() {
+        grid.textContent = "";
+        for (let i = 1; i <= currentMax && i <= TOTAL_NUMEROS; i++) {
+          const btn = document.createElement("button");
+          btn.textContent = i;
+          btn.className = reservedNumbers.has(i.toString())
+            ? "py-1 rounded bg-red-500 cursor-not-allowed"
+            : "py-1 rounded bg-green-500 hover:bg-green-700";
+          btn.disabled = reservedNumbers.has(i.toString());
+          btn.addEventListener("click", () => handleSelect(i));
+          grid.appendChild(btn);
         }
+        loadMoreBtn.style.display = currentMax >= TOTAL_NUMEROS ? "none" : "block";
       }
 
       async function handleSelect(num) {
         if (reservedNumbers.has(num.toString())) return;
 
-        const confirmed = confirm(`¿Quieres comprar el número ${num}?`);
+        const confirmed = confirm("¿Quieres comprar el número " + num + "?");
         if (!confirmed) return;
 
         try {
-          const res = await fetch('/api/iniciar-pago', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ numero: num }),
-          });
-          const data = await res.json();
-
-          if (!res.ok) {
-            alert('No se pudo iniciar el pago: ' + (data.error || 'Error desconocido'));
-            return;
-          }
-
-          reservedNumbers.add(num.toString());
-          renderButtons();
-
-          window.location.href = data.init_point;
+          // Guardar número reservado en Firestore
+          await addDoc(collection(db, "numerosReservados"), { numero: num });
+          alert(`Número ${num} reservado con éxito.`);
+          // onSnapshot se encargará de actualizar la UI automáticamente
         } catch (error) {
-          alert('Error al iniciar el pago: ' + error.message);
+          alert('Error al reservar: ' + error.message);
         }
       }
 
-      loadMoreBtn.addEventListener('click', () => {
+      loadMoreBtn.addEventListener("click", () => {
         currentMax += PAGE_SIZE;
         if (currentMax > TOTAL_NUMEROS) currentMax = TOTAL_NUMEROS;
         renderButtons();
       });
 
-      fetchReserved().then(() => renderButtons());
+      // Mostrar botones inicialmente (todos verdes)
+      renderInitialButtons();
+
+      // Escuchar en tiempo real la colección para actualizar reservados
+      onSnapshot(collection(db, "numerosReservados"), (snapshot) => {
+        reservedNumbers.clear();
+        snapshot.forEach((doc) => {
+          reservedNumbers.add(doc.data().numero.toString());
+        });
+        renderButtons();
+      });
     });
   </script>
 

@@ -1,0 +1,23 @@
+---
+import { db } from '../lib/firebase';
+import { doc, updateDoc } from 'firebase/firestore';
+
+const url = new URL(import.meta.url);
+const numero = url.searchParams.get('numero');
+
+if (numero) {
+  try {
+    const docRef = doc(db, 'rifas_numeros', numero);
+    await updateDoc(docRef, { reservado: true, enProceso: false, fechaConfirmacion: new Date().toISOString() });
+  } catch (e) {
+    console.error('Error confirmando reserva:', e);
+  }
+}
+---
+
+<html>
+  <body>
+    <h1>Pago exitoso</h1>
+    <p>Gracias por tu compra del número {numero}.</p>
+  </body>
+</html>

@@ -10,7 +10,7 @@ export const post: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Número no enviado' }), { status: 400 });
     }
 
-    await setDoc(doc(db, 'rifa_numeros', numero.toString()), {
+    await setDoc(doc(db, 'rifas_numeros', numero.toString()), {
       reservado: true,
       fechaReserva: new Date().toISOString()
     });
