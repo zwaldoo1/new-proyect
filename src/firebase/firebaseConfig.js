@@ -1,10 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// 🔹 Configuración de tu Firestore
 const firebaseConfig = {
   apiKey: "AIzaSyDrn2-siV9XZxms0caGwz6kA1bCM4i5kgM",
   authDomain: "campeonato-v1.firebaseapp.com",
@@ -15,5 +12,12 @@ const firebaseConfig = {
   measurementId: "G-WCQ3P76HEL"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 🔹 Escuchar cambios en tiempo real
+const q = query(collection(db, "rifa_numeros"), orderBy("numero", "asc"));
+onSnapshot(q, (snapshot) => {
+  const numeros = snapshot.docs.map(doc => doc.data());
+  console.log(numeros); // Aquí podrías actualizar tu HTML
+});
