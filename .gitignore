@@ -1,2 +1,29 @@
 node_modules
 .vercel
+# 🚫 Archivos de entorno
+.env
+.env.local
+.env.production
+
+# ⚙️ Salida de build
+dist/
+build/
+
+# 📦 Node modules
+node_modules/
+
+# 🧪 Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🔄 Archivos temporales
+.DS_Store
+*.log
+*.tmp
+
+# ⚠️ Archivos específicos del sistema
+Thumbs.db
+
+# ⚙️ Astro cache
+.astro/
