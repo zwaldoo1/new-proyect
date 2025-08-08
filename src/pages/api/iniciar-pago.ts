@@ -3,6 +3,7 @@ import { db } from '../../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
+
 const client = new MercadoPagoConfig({
   accessToken: 'APP_USR-5582373581608941-080422-888d269c0dff6debe7463c5d5583aa1b-577675843',
 });

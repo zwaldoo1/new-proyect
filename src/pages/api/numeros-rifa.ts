@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { db } from '../../firebase/firebaseConfig.js';
 import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../lib/admin';
 
 export const GET: APIRoute = async () => {
   try {

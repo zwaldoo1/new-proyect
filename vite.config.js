@@ -1,6 +1,9 @@
-// vite.config.mjs
-export default {
-  server: {
-    allowedHosts: ['eebfafe4802f.ngrok-free.app],
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  vite: {
+    server: {
+      allowedHosts: 'all', // 👈 esta línea es clave
+    },
   },
-};
+});
