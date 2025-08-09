@@ -5,13 +5,13 @@ const links = [
   { text: 'Bases', href: '/reglas' },
   { text: 'Inscripción', href: '/inscripcion' },
   { text: 'Contacto', href: '/contacto' },
-  { text: 'Nuestra Rifa', href: '/rifa' }
+  { text: 'Nuestra Rifa', href: '/rifa' },
 ];
 ---
 
-<nav class="navbar">
+<nav class="navbar" style="--nav-h: 64px;">
   <div class="navbar-container">
-    <a href="/" class="brand-logo">
+    <a href="/" class="brand-logo" aria-label="Inicio">
       <img src="/images/logo111.png" alt="Logo" />
     </a>
 
@@ -21,7 +21,7 @@ const links = [
       ))}
     </ul>
 
-    <button class="hamburger" aria-label="Abrir menú">☰</button>
+    <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
   </div>
 
   <ul class="mobile-menu" id="mobileMenu">
@@ -32,24 +32,59 @@ const links = [
 </nav>
 
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   :root { --nav-grad: linear-gradient(135deg, #00bfff, #ff7f50); }
-  .navbar { background: var(--nav-grad); color: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,.1); padding: 10px 20px; }
-  .navbar-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%; }
-  .brand-logo { font-size: 2rem; font-weight: bold; color: #fff; text-decoration: none; display: flex; align-items: center; }
-  .brand-logo img { height: 40px; width: auto; }
-  .nav-links { list-style: none; display: flex; gap: 30px; margin-left: auto; }
-  .nav-links li a { text-decoration: none; color: #fff; font-size: 1.1rem; font-weight: 500; padding: 10px 15px; border-radius: 5px; text-transform: uppercase; transition: color .3s, transform .3s; }
-  .nav-links li a:hover { color: #ffeb3b; transform: scale(1.05); }
-  .hamburger { display: none; font-size: 2rem; background: transparent; border: none; color: white; cursor: pointer; }
-  .mobile-menu { display: none; flex-direction: column; background-color: #333; position: absolute; top: 100%; left: 0; right: 0; padding: 20px; gap: 15px; z-index: 999; }
+  .navbar {
+    background: var(--nav-grad);
+    color: #fff;
+    position: fixed; /* fijo en móvil y desktop para consistencia */
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    padding: 10px 20px;
+    height: var(--nav-h);
+  }
+  .navbar-container {
+    max-width: 1200px; margin: 0 auto;
+    height: 100%;
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+  }
+  .brand-logo { color: #fff; text-decoration: none; display: flex; align-items: center; }
+  .brand-logo img { height: calc(var(--nav-h) - 24px); width: auto; display: block; }
+  .nav-links { list-style: none; display: flex; gap: 24px; margin-left: auto; }
+  .nav-links li a {
+    text-decoration: none; color: #fff; font-size: 1rem; font-weight: 600;
+    padding: 8px 10px; border-radius: 6px; text-transform: uppercase; transition: color .2s, transform .2s;
+  }
+  .nav-links li a:hover { color: #ffeb3b; transform: translateY(-1px); }
+  .hamburger { display: none; font-size: 1.75rem; background: transparent; border: none; color: #fff; cursor: pointer; }
+
+  /* Panel móvil fijado bajo la barra, con altura de viewport y scroll propio */
+  .mobile-menu {
+    display: none; flex-direction: column; gap: 12px;
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    height: calc(100dvh - var(--nav-h));
+    background-color: #222;
+    padding: 16px 20px 24px;
+    z-index: 999; overflow-y: auto;
+  }
   .mobile-menu.active { display: flex; }
   .mobile-menu li { list-style: none; }
-  .mobile-menu li a { color: white; text-decoration: none; font-size: 1.2rem; padding: 10px; transition: background-color .3s; }
-  .mobile-menu li a:hover { background-color: rgba(255,255,255,.1); }
+  .mobile-menu li a {
+    color: #fff; text-decoration: none; font-size: 1.1rem; padding: 10px 4px; border-radius: 6px;
+  }
+  .mobile-menu li a:active { background: rgba(255,255,255,.08); }
+
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hamburger { display: block; }
+  }
+
+  /* Empuje del contenido de la página para no quedar bajo la barra */
+  :global(body) { padding-top: 64px; } /* igual a --nav-h */
+  @media (max-width: 768px) {
+    :global(body) { padding-top: 64px; }
   }
 </style>
 
@@ -59,12 +94,20 @@ const links = [
     const hamburger = document.querySelector('.hamburger');
     if (!hamburger || !mobileMenu) return;
 
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
+    const toggle = () => {
+      const active = mobileMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', String(active));
+      // Evita scroll del fondo cuando el panel está abierto
+      document.documentElement.style.overflow = active ? 'hidden' : '';
+      document.body.style.overflow = active ? 'hidden' : '';
+    };
 
-    mobileMenu.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    });
+    hamburger.addEventListener('click', toggle);
+    mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }));
   });
 </script>
