@@ -1,177 +1,70 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Navbar Responsive</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+---
+const links = [
+  { text: 'Inicio', href: '/' },
+  { text: 'Equipos', href: '/equipos' },
+  { text: 'Bases', href: '/reglas' },
+  { text: 'Inscripción', href: '/inscripcion' },
+  { text: 'Contacto', href: '/contacto' },
+  { text: 'Nuestra Rifa', href: '/rifa' }
+];
+---
 
-    html, body {
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-    }
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="/" class="brand-logo">
+      <img src="/images/logo111.png" alt="Logo" />
+    </a>
 
-    .navbar {
-      background: linear-gradient(135deg, #00bfff, #ff7f50);
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 10px 20px;
-    }
-
-.navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.brand-logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
-.brand-logo img {
-  height: 40px;
-  width: auto;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  margin-left: auto; /* Alinea a la derecha */
-}
-
-
-    .nav-links li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding: 10px 15px;
-      border-radius: 5px;
-      text-transform: uppercase;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .nav-links li a:hover {
-      color: #ffeb3b;
-      transform: scale(1.05);
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 2rem;
-      background: transparent;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #333;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      gap: 15px;
-      z-index: 999;
-    }
-
-    .mobile-menu.active {
-      display: flex;
-    }
-
-    .mobile-menu li {
-      list-style: none;
-    }
-
-    .mobile-menu li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.2rem;
-      padding: 10px;
-      transition: background-color 0.3s;
-    }
-
-    .mobile-menu li a:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hamburger {
-        display: block;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <nav class="navbar">
-    <div class="navbar-container">
-      <a href="/" class="brand-logo">
-        <img src="/images/logo111.png" alt="Logo" />
-      </a>
-
-      <ul class="nav-links">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/equipos">Equipos</a></li>
-        <li><a href="/reglas">Bases</a></li>
-        <li><a href="/inscripcion">Inscripción</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-        <li><a href="/rifa">Nuestra Rifa</a></li>
-      </ul>
-
-      <button class="hamburger">☰</button>
-    </div>
-
-    <ul class="mobile-menu" id="mobileMenu">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/equipos">Equipos</a></li>
-      <li><a href="/reglas">Reglas</a></li>
-      <li><a href="/inscripcion">Inscripción</a></li>
-      <li><a href="/contacto">Contacto</a></li>
+    <ul class="nav-links" id="desktopMenu">
+      {links.map((l) => (
+        <li><a href={l.href}>{l.text}</a></li>
+      ))}
     </ul>
-  </nav>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const menu = document.getElementById('mobileMenu');
-      const hamburger = document.querySelector('.hamburger');
+    <button class="hamburger" aria-label="Abrir menú">☰</button>
+  </div>
 
-      hamburger.addEventListener('click', function () {
-        menu.classList.toggle('active');
-      });
+  <ul class="mobile-menu" id="mobileMenu">
+    {links.map((l) => (
+      <li><a href={l.href}>{l.text}</a></li>
+    ))}
+  </ul>
+</nav>
 
-      // Cierra el menú al hacer clic en un enlace
-      document.querySelectorAll('.mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          menu.classList.remove('active');
-        });
-      });
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --nav-grad: linear-gradient(135deg, #00bfff, #ff7f50); }
+  .navbar { background: var(--nav-grad); color: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,.1); padding: 10px 20px; }
+  .navbar-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%; }
+  .brand-logo { font-size: 2rem; font-weight: bold; color: #fff; text-decoration: none; display: flex; align-items: center; }
+  .brand-logo img { height: 40px; width: auto; }
+  .nav-links { list-style: none; display: flex; gap: 30px; margin-left: auto; }
+  .nav-links li a { text-decoration: none; color: #fff; font-size: 1.1rem; font-weight: 500; padding: 10px 15px; border-radius: 5px; text-transform: uppercase; transition: color .3s, transform .3s; }
+  .nav-links li a:hover { color: #ffeb3b; transform: scale(1.05); }
+  .hamburger { display: none; font-size: 2rem; background: transparent; border: none; color: white; cursor: pointer; }
+  .mobile-menu { display: none; flex-direction: column; background-color: #333; position: absolute; top: 100%; left: 0; right: 0; padding: 20px; gap: 15px; z-index: 999; }
+  .mobile-menu.active { display: flex; }
+  .mobile-menu li { list-style: none; }
+  .mobile-menu li a { color: white; text-decoration: none; font-size: 1.2rem; padding: 10px; transition: background-color .3s; }
+  .mobile-menu li a:hover { background-color: rgba(255,255,255,.1); }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
     });
-  </script>
 
-</body>
-</html>
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
+  });
+</script>
