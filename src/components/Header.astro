@@ -7,31 +7,28 @@ import "../styles/global.css";
 ---
 
 <BaseLayout>
-  <main class="bg-animated flex flex-col items-center justify-center text-center px-4">
+  <main class="bg-animated flex flex-col items-center text-center px-4">
 
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
         const sections = document.querySelectorAll("[data-scroll]");
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.remove("opacity-0", "translate-y-10");
-            } else {
-              entry.target.classList.add("opacity-0", "translate-y-10");
-            }
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            e.target.classList.toggle("opacity-0", !e.isIntersecting);
+            e.target.classList.toggle("translate-y-10", !e.isIntersecting);
           });
         }, { threshold: 0.2 });
-        sections.forEach(section => observer.observe(section));
+        sections.forEach(s => obs.observe(s));
       });
     </script>
 
     <!-- Hero -->
-    <section class="bg-white py-16 px-6 w-full">
-      <div class="max-w-4xl mx-auto text-center">
+    <section class="bg-white py-12 w-full">
+      <div class="max-w-4xl mx-auto px-4">
         <h2 class="text-3xl font-semibold text-gray-800">Bienvenido al Campeonato de Fútbol</h2>
         <p class="text-gray-600 mt-4">Inscripción abierta, elige tu método de pago.</p>
 
-        <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
+        <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           <a href="/inscripcion" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Inscribirme</a>
           <a href="/reglas" class="px-6 py-3 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 transition">Ver Reglas</a>
           <a href="/equipos" class="px-6 py-3 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition">Equipos</a>
@@ -39,27 +36,39 @@ import "../styles/global.css";
       </div>
     </section>
 
-    <Carrusel />
+    <!-- Carrusel -->
+    <div class="w-full">
+      <div class="max-w-5xl mx-auto px-4">
+        <Carrusel />
+      </div>
+    </div>
 
     <!-- Contáctanos -->
-    <section class="mt-12 bg-gray-50 p-8 opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
-      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Contáctanos</h2>
-      <div class="flex flex-col md:flex-row items-center justify-center gap-8 max-w-5xl mx-auto">
-        <iframe class="w-full md:w-[560px] h-[315px]"
-          src="https://www.youtube.com/embed/yDg4D4DLH78?si=Nv-TfVQ2KAwmPdXj"
-          title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-        </iframe>
+    <section class="mt-12 bg-gray-50 p-6 sm:p-8 opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Contáctanos</h2>
 
-        <div class="flex flex-col items-center p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full md:w-auto" data-scroll>
-          <h3 class="text-2xl font-bold text-white text-center mb-6">¡Hablemos!</h3>
-          <p class="mb-4 text-white/90">Conéctate con nosotros a través de nuestras redes sociales o envíanos un mensaje.</p>
-          <div class="space-x-6 text-3xl">
-            <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500 hover:bg-green-600">WA</a>
-            <a href="https://facebook.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700">F</a>
-            <a href="https://instagram.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500 hover:bg-pink-600">IG</a>
-            <a href="https://twitter.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-400 hover:bg-blue-500">X</a>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+          <!-- Iframe responsivo -->
+          <div class="w-full md:w-[560px]" style="position:relative; aspect-ratio:16/9;">
+            <iframe
+              src="https://www.youtube.com/embed/yDg4D4DLH78?si=Nv-TfVQ2KAwmPdXj"
+              title="YouTube video player"
+              style="position:absolute; inset:0; width:100%; height:100%; border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="flex flex-col items-center p-6 sm:p-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full md:w-auto" data-scroll>
+            <h3 class="text-2xl font-bold text-white text-center mb-4">¡Hablemos!</h3>
+            <p class="mb-4 text-white/90 text-center">Conéctate con nosotros a través de nuestras redes sociales o envíanos un mensaje.</p>
+            <div class="flex gap-4 text-base">
+              <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500 hover:bg-green-600">WA</a>
+              <a href="https://facebook.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700">F</a>
+              <a href="https://instagram.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500 hover:bg-pink-600">IG</a>
+              <a href="https://twitter.com/tu-pagina" target="_blank" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-400 hover:bg-blue-500">X</a>
+            </div>
           </div>
         </div>
       </div>
@@ -67,62 +76,69 @@ import "../styles/global.css";
 
     <!-- Preguntas Frecuentes -->
     <section class="faq-section w-full px-4">
-      <h2 class="faq-title">Preguntas Frecuentes</h2>
-      <div class="faq-container">
-        <div class="faq-item">
-          <h3 class="faq-question">¿Cuántos jugadores por equipo?</h3>
-          <div class="highlight-box">
-            <p>Cada equipo debe tener 7 jugadores, y pueden agregar hasta 3 suplentes.</p>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="faq-title">Preguntas Frecuentes</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <h3 class="faq-question">¿Cuántos jugadores por equipo?</h3>
+            <div class="highlight-box">
+              <p>Cada equipo debe tener 7 jugadores, y pueden agregar hasta 3 suplentes.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item">
-          <h3 class="faq-question">¿Cómo se realiza el pago?</h3>
-          <div class="highlight-box">
-            <p>Puedes elegir entre pagar con tarjeta o mediante transferencia bancaria.</p>
+          <div class="faq-item">
+            <h3 class="faq-question">¿Cómo se realiza el pago?</h3>
+            <div class="highlight-box">
+              <p>Puedes elegir entre pagar con tarjeta o mediante transferencia bancaria.</p>
+            </div>
           </div>
-        </div>
 
-        <div class="faq-item">
-          <h3 class="faq-question">¿Cuál es la fecha límite para inscribirse?</h3>
-          <div class="highlight-box">
-            <p>Las inscripciones estarán abiertas hasta que se completen los 8 equipos o hasta la fecha límite.</p>
+          <div class="faq-item">
+            <h3 class="faq-question">¿Cuál es la fecha límite para inscribirse?</h3>
+            <div class="highlight-box">
+              <p>Las inscripciones estarán abiertas hasta que se completen los 8 equipos o hasta la fecha límite.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Botón flotante -->
+    <!-- Botón flotante (con zonas seguras móviles) -->
     <a href="/inscripcion"
-       class="fixed bottom-6 right-6 bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg hover:scale-110 transition-transform">
+       class="fixed z-20 bg-blue-600 text-white font-bold py-3 px-5 rounded-full shadow-lg text-base sm:text-lg hover:scale-110 transition-transform"
+       style="right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));">
       ¡Inscríbete ahora!
     </a>
 
     <!-- CTA Inscripción -->
-    <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
-      <h2 class="text-2xl font-bold text-white text-center mb-6">Formulario de Inscripción</h2>
-      <p class="text-white/90 mb-6">Completa el formulario para inscribirte.</p>
-      <form action="/inscripcion" method="GET" class="text-center">
-        <button type="submit" class="btn-primary">Inscribirse</button>
-      </form>
+    <section class="mt-12 p-6 sm:p-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-white text-center mb-6">Formulario de Inscripción</h2>
+        <p class="text-white/90 mb-6 text-center">Completa el formulario para inscribirte.</p>
+        <form action="/inscripcion" method="GET" class="text-center">
+          <button type="submit" class="btn-primary">Inscribirse</button>
+        </form>
+      </div>
     </section>
 
     <!-- Asesoramiento -->
-    <section class="mt-12 p-8 bg-gradient-to-r from-blue-500 to-blue-500 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
-      <h2 class="text-2xl font-bold text-white text-center mb-6">¿Tienes dudas sobre el pago?</h2>
-      <p class="text-white/90 mb-4">Escríbenos y te ayudaremos en minutos.</p>
-      <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="btn-contact bg-green-500 hover:bg-green-600 inline-flex items-center">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6 mr-2">Escríbenos por WhatsApp
-        </a>
-        <a href="mailto:soporte@tuempresa.com" class="btn-contact bg-blue-500 hover:bg-blue-600 inline-flex items-center">
-          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo" class="w-6 h-6 mr-2">Envíanos un Email
-        </a>
+    <section class="mt-12 p-6 sm:p-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 w-full" data-scroll>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-white text-center mb-6">¿Tienes dudas sobre el pago?</h2>
+        <p class="text-white/90 mb-4 text-center">Escríbenos y te ayudaremos en minutos.</p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <a href="https://wa.me/XXXXXXXXXXX" target="_blank" class="btn-contact bg-green-500 hover:bg-green-600 inline-flex items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6 mr-2">Escríbenos por WhatsApp
+          </a>
+          <a href="mailto:soporte@tuempresa.com" class="btn-contact bg-blue-500 hover:bg-blue-600 inline-flex items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo" class="w-6 h-6 mr-2">Envíanos un Email
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- Botonera inferior -->
-    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-4 w-full pb-12">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full pb-16">
       <a href="/inscripcion" class="px-6 py-3 bg-green-500 text-white font-bold rounded-lg shadow-md transition-transform transform hover:scale-105 hover:bg-green-600">
         Inscripción Abierta
       </a>
@@ -138,10 +154,13 @@ import "../styles/global.css";
   </main>
 
   <style>
-    /* Quita directivas @tailwind aquí: ya están en tu CSS global */
+    /* Contenedores y overflow seguros para móvil */
+    :global(html), :global(body) { overflow-x: hidden; }
+    img, video, iframe { max-width: 100%; height: auto; display: block; }
+
     .faq-section {
-      margin-top: 5rem;
-      padding: 3rem 1.5rem;
+      margin-top: 3rem;
+      padding: 2rem 1rem;
       background: linear-gradient(to bottom right, #3b82f6, #2563eb, #1e40af);
       color: white;
       border-radius: 1rem;
@@ -157,25 +176,21 @@ import "../styles/global.css";
     .faq-item {
       background-color: white;
       border-radius: 0.75rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      transition: box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: box-shadow .3s ease;
+      text-align: left;
     }
-    .faq-item:hover { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); }
-    .faq-question { font-size: 1.125rem; font-weight: 600; color: #1e40af; margin-bottom: 0.75rem; }
+    .faq-item:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+    .faq-question { font-size: 1.125rem; font-weight: 600; color: #1e40af; margin-bottom: .5rem; }
     .highlight-box {
       background-color: #ebf8ff;
       border-left: 4px solid #3b82f6;
       color: #1e3a8a;
       padding: 1rem;
-      border-radius: 0.5rem;
-      font-size: 0.95rem;
-      text-align: left;
+      border-radius: .5rem;
+      font-size: .95rem;
     }
-
-    /* Evitar desbordes horizontales en móvil por iframes o contenedores */
-    :global(html), :global(body) { overflow-x: hidden; }
-    iframe { max-width: 100%; }
   </style>
 </BaseLayout>
